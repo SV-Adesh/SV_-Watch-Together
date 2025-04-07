@@ -13,7 +13,7 @@ const config = {
   production: {
     port: process.env.PORT || 5000,
     cors: {
-      origin: process.env.CLIENT_URL || 'https://watch-together-frontend.vercel.app',
+      origin: process.env.CLIENT_URL || 'https://watch-together-adeshs-projects-d64f64b4.vercel.app',
       methods: ['GET', 'POST'],
       credentials: true
     }

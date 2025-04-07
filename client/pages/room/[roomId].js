@@ -40,7 +40,7 @@ export default function Room() {
     if (!roomId) return;
 
     // Backend URL (will be set to env variable in production)
-    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+    const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL;
     
     // Connect to Socket.io server
     socket = io(BACKEND_URL, {
