@@ -9,10 +9,8 @@ const YouTubePlayer = ({ videoId, isHost, onPlay, onPause, onSeek, isShort = fal
     // Load YouTube IFrame API script
     if (!window.YT) {
       const tag = document.createElement('script');
-      // Use HTTPS in production, HTTP in development
-      tag.src = process.env.NODE_ENV === 'production' 
-        ? 'https://www.youtube.com/iframe_api'
-        : 'http://www.youtube.com/iframe_api';
+      // Use protocol-relative URL to match the current page protocol
+      tag.src = '//www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
