@@ -8,13 +8,25 @@ const YouTubePlayer = ({ videoId, isHost, onPlay, onPause, onSeek, isShort = fal
   useEffect(() => {
     // Load YouTube IFrame API script
     if (!window.YT) {
+      // Create a global callback that YouTube will call when API is loaded
+      window.onYouTubeIframeAPIReady = initializePlayer;
+      
+      // Add the script tag to document
       const tag = document.createElement('script');
-      // Use protocol-relative URL to match the current page protocol
-      tag.src = '//www.youtube.com/iframe_api';
+      tag.src = 'https://www.youtube.com/iframe_api';
+      
+      // Add error handling for the script
+      tag.onerror = (e) => {
+        console.error('Error loading YouTube iframe API:', e);
+        // Try alternative loading method if the first one fails
+        const alternativeTag = document.createElement('script');
+        alternativeTag.src = 'https://www.youtube.com/iframe_api';
+        alternativeTag.crossOrigin = 'anonymous';
+        document.head.appendChild(alternativeTag);
+      };
+      
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      window.onYouTubeIframeAPIReady = initializePlayer;
     } else {
       initializePlayer();
     }
