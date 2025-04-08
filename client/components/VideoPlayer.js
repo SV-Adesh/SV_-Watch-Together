@@ -142,6 +142,7 @@ const VideoPlayer = forwardRef(({
             onPause={onPause}
             onSeek={onSeek}
             isShort={isYouTubeShort(videoUrl)}
+            fallbackUrl={`https://www.youtube.com/embed/${extractYouTubeId(videoUrl)}?autoplay=1&modestbranding=1&rel=0`}
           />
         ) : (
           <MP4Player
